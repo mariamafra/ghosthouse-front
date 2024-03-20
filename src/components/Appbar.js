@@ -4,24 +4,16 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import AddIcon from '@mui/icons-material/Add';
 import {Link} from 'react-router-dom';
+import logo from '../imagem/gh.jpg'
 
 export default function Appbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ bgcolor: "black" }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+          <img src={logo} alt="Logo" style={{ width: '80px', marginRight: '50px' }} />
           <Typography component={Link} to={'/'} variant="h6" sx={{ flexGrow: 1 }} style={{ textDecoration: 'none', color: 'inherit' }}>
             GHOSTHOUSE
           </Typography>

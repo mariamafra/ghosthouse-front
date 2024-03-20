@@ -6,7 +6,7 @@ import { Container, Typography } from "@mui/material";
 function AddProperty() {
     return (
         <Container>
-            <Appbar />
+            <Appbar position="static" sx={{ bgcolor: "black" }}/>
             <Typography variant="h3" gutterBottom>
                 <Property />
             </Typography>
