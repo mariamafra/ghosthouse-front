@@ -17,7 +17,7 @@ export default function Appbar() {
           <Typography component={Link} to={'/'} variant="h6" sx={{ flexGrow: 1 }} style={{ textDecoration: 'none', color: 'inherit' }}>
             GHOSTHOUSE
           </Typography>
-          <Typography component={Link} to={'my-reservations'} sx={{mr:10, textDecoration: 'none', color: 'inherit'}}> 
+          <Typography component={Link} to='/my-reservations' sx={{mr:10, textDecoration: 'none', color: 'inherit'}}> 
             Minhas reservas
           </Typography>
           <IconButton
