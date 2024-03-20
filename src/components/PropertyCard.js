@@ -7,6 +7,8 @@ import { VisibilityOutlined } from '@material-ui/icons';
 
 const PropertyCard = ({ property }) => {
   const { id, nome, descricao, valorDiaria, endereco, imageUrl } = property;
+  console.log("aaaaa ", property)
+  console.log("nome  ", nome)
 
   return (
     <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -26,10 +28,10 @@ const PropertyCard = ({ property }) => {
           </Typography>
         </Box>
         <Typography variant="body2" color="text.secondary">
-          Price: {valorDiaria}
+          Valor Diária: {valorDiaria}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Location: {endereco}
+          Endereço: {endereco}
         </Typography>
       </CardContent>
       <Button

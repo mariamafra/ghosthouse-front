@@ -7,15 +7,6 @@ import { Container } from "@mui/material";
 import {Link, useParams} from 'react-router-dom';
 import axios from 'axios';
 import { PROPERTIES_URL } from "../endpoints";
-/*
-const property = {
-  address: '123 Main St',
-  city: 'Anytown',
-  state: 'CA',
-  zipCode: '12345',
-  numberOfRooms: '3',
-  price: '$500,000',
-};*/
 
 const PropertyDetailPage = () => {
   let { id } = useParams();
