@@ -34,7 +34,7 @@ const PropertyCard = ({ property }) => {
       </CardContent>
       <Button
             variant="contained"
-            color="primary"
+            color="grey"
             startIcon={<VisibilityOutlined />}
             type="submit"
             style={{marginTop: '40px'}}

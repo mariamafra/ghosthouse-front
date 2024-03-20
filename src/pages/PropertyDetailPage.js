@@ -36,7 +36,7 @@ const PropertyDetailPage = () => {
       <PropertyDetail property={property} />
       <Button
             variant="contained"
-            color="primary"
+            color="grey"
             startIcon={<AddCircleOutlineIcon />}
             type="submit"
             style={{marginTop: '40px'}}

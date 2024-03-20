@@ -21,7 +21,7 @@ function Home() {
     return (
         <div>
             <Appbar />
-            <Typography variant="h3" gutterBottom>
+            <Typography variant="h3" gutterBottom sx={{ m: 2 }}>
                 Principais imóveis cadastrados
             </Typography>
             <PropertyList properties={properties}/>

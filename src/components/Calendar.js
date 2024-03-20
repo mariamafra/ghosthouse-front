@@ -62,7 +62,7 @@ export default function DateRangePicker({dates, onDatesSelected}) {
         />
       </div>
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <Button variant="contained" color="primary" onClick={handleNextButtonClick}>
+        <Button variant="contained" color="grey" onClick={handleNextButtonClick}>
           Confirmar Reserva
         </Button>
       </div>
