@@ -51,6 +51,15 @@ function Property() {
               onChange={handleInputChange}
             />
           </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Imagem"
+              name="imagem"
+              value={houseData.description}
+              onChange={handleInputChange}
+            />
+          </Grid>
           <Grid item xs={12} sm={6}>
             <InputLabel id="categoria-label">Categoria</InputLabel>
             <Select
@@ -68,7 +77,7 @@ function Property() {
               <MenuItem value="Penthouse">Penthouse</MenuItem>
             </Select>
           </Grid>
-          <Grid item sx={{mt:50}} xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
               label="Zip Code"
