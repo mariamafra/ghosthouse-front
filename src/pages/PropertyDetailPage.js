@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Appbar from '../components/Appbar'
 import PropertyDetail from '../components/PropertyDetail';
 import { Button } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { Container } from "@mui/material";
-import {Link} from 'react-router-dom';Home.js
-
+import {Link, useParams} from 'react-router-dom';
+import axios from 'axios';
+/*
 const property = {
   address: '123 Main St',
   city: 'Anytown',
@@ -13,9 +14,21 @@ const property = {
   zipCode: '12345',
   numberOfRooms: '3',
   price: '$500,000',
-};
+};*/
 
 const PropertyDetailPage = () => {
+  let { id } = useParams();
+  const [property, setProperty] = useState([])
+
+    useEffect(() => {
+        axios.get(`http://localhost:8081/api/properties/${id}`)
+        .then(res => { 
+            console.log('sim ', res)
+            setProperty(res.data);
+        })
+        .catch(err => console.log(err))
+    }, [])
+
   return (
     <Container>
       <Appbar />
@@ -26,7 +39,7 @@ const PropertyDetailPage = () => {
             startIcon={<AddCircleOutlineIcon />}
             type="submit"
             style={{marginTop: '40px'}}
-            component={Link} to={'/calendar-reservation'}
+            component={Link} to={`/calendar-reservation/${id}`}
           >
             Reservar
           </Button>

@@ -12,8 +12,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/addProperty' element={<AddProperty />}/>
-          <Route path='/propertyDetail' element={<PropertyDetailPage />}/>
-          <Route path='/calendar-reservation' element={<ReservationCalendar />}/>
+          <Route path='/propertyDetail/:id' element={<PropertyDetailPage />}/>
+          <Route path='/calendar-reservation/:id' element={<ReservationCalendar />}/>
         </Routes>
       </Router>
     </div>

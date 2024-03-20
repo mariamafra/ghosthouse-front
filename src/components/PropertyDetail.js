@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Typography, Grid, Box } from '@material-ui/core';
+import { Container, Typography, Grid, Box, Paper } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,52 +20,66 @@ const useStyles = makeStyles((theme) => ({
   propertyContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'sart',
+    justifyContent: 'start',
     marginBottom: theme.spacing(1),
   },
   label: {
     fontWeight: 'bold',
     marginRight: theme.spacing(1),
   },
+  imageGridItem: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 }));
 
 const PropertyDetail = ({ property }) => {
   const classes = useStyles();
+  
+  const toPascalCase = (str) => {
+    if (!str) return ""; // If str is not defined or null, return an empty string
+    return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+  
 
   return (
     <Container className={classes.root}>
       <Box border={1} p={3} borderRadius={8}>
         <Typography variant="h4" className={classes.title}>
-          Property Details
+          {property.nome}
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <div className={classes.propertyContainer}>
-              <Typography variant="h6" className={classes.label}>Address:</Typography>
-              <Typography variant="h6">{property.address}</Typography>
+              <Typography variant="h6" className={classes.label}>Endereço:</Typography>
+              <Typography variant="h6">{property.endereco}</Typography>
             </div>
             <div className={classes.propertyContainer}>
-              <Typography variant="h6" className={classes.label}>City:</Typography>
-              <Typography variant="h6">{property.city}</Typography>
+              <Typography variant="h6" className={classes.label}>Descrição:</Typography>
+              <Typography variant="h6">{property.descricao}</Typography>
             </div>
             <div className={classes.propertyContainer}>
-              <Typography variant="h6" className={classes.label}>State:</Typography>
-              <Typography variant="h6">{property.state}</Typography>
+              <Typography variant="h6" className={classes.label}>Categoria:</Typography>
+              <Typography variant="h6">{toPascalCase(property.categoria)}</Typography>
+            </div>
+            <div className={classes.propertyContainer}>
+              <Typography variant="h6" className={classes.label}>Área:</Typography>
+              <Typography variant="h6">{property.area}</Typography>
+            </div>
+            <div className={classes.propertyContainer}>
+              <Typography variant="h6" className={classes.label}>Número de Quartos:</Typography>
+              <Typography variant="h6">{property.quantidadeQuartos}</Typography>
+            </div>
+            <div className={classes.propertyContainer}>
+              <Typography variant="h6" className={classes.label}>Valor Diária:</Typography>
+              <Typography variant="h6">{property.valorDiaria}</Typography>
             </div>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <div className={classes.propertyContainer}>
-              <Typography variant="h6" className={classes.label}>Zip Code:</Typography>
-              <Typography variant="h6">{property.zipCode}</Typography>
-            </div>
-            <div className={classes.propertyContainer}>
-              <Typography variant="h6" className={classes.label}>Number of Rooms:</Typography>
-              <Typography variant="h6">{property.numberOfRooms}</Typography>
-            </div>
-            <div className={classes.propertyContainer}>
-              <Typography variant="h6" className={classes.label}>Price:</Typography>
-              <Typography variant="h6">{property.price}</Typography>
-            </div>
+          <Grid item xs={12} sm={6} className={classes.imageGridItem}>
+            <Paper elevation={3}>
+              <img src={property.imageUrl} alt={property.nome} className={classes.image} />
+            </Paper>
           </Grid>
         </Grid>
       </Box>

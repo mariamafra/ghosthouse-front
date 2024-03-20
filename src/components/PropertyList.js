@@ -2,6 +2,8 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import PropertyCard from './PropertyCard';
 
+
+/*
 const properties = [
   {
     id: 1,
@@ -21,8 +23,8 @@ const properties = [
   },
   // Add more properties as needed
 ];
-
-const PropertyList = () => {
+*/
+const PropertyList = ({properties}) => {
   return (
     <Grid container spacing={2}>
       {properties.map((property) => (

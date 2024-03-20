@@ -1,17 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Button, TextField } from '@mui/material';
+import dayjs from 'dayjs';
 
-export default function DateRangePicker() {
+export default function DateRangePicker({dates}) {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  
+  useEffect(() => {
+    if (startDate) {
+      const blockedDatesAfterStart = dates.filter(date =>
+        dayjs(date).isAfter(startDate, 'day')
+      );
+
+      if (blockedDatesAfterStart.length > 0) {
+        const earliestBlockedDate = blockedDatesAfterStart.reduce((earliest, date) =>
+          dayjs(date).isBefore(earliest) ? date : earliest
+        );
+
+        setEndDate(dayjs(earliestBlockedDate).subtract(1, 'day'));
+      }
+    }
+  }, [startDate, dates]);
+
+
+  const shouldDisableDate = (date) => {
+    return dates.some((blockedDate) => date.isSame(blockedDate, 'day'));
+  };
 
   const handleNextButtonClick = () => {
-    // Add your logic here for what to do when the next button is clicked
-    console.log('Start Date:', startDate);
-    console.log('End Date:', endDate);
+    
+      console.log('Start Date:', startDate);
+      console.log('End Date:', endDate);
+      
   };
 
   return (
@@ -20,14 +43,18 @@ export default function DateRangePicker() {
         <DatePicker
           label="Start Date"
           value={startDate}
-          onChange={(date) => setStartDate(date)}
+          onChange={(date) => (setStartDate(date), setEndDate(null))}
           renderInput={(params) => <TextField {...params} />}
+          shouldDisableDate={shouldDisableDate}
         />
         <DatePicker
           label="End Date"
           value={endDate}
           onChange={(date) => setEndDate(date)}
           renderInput={(params) => <TextField {...params} />}
+          shouldDisableDate={shouldDisableDate}
+          minDate={startDate}
+          maxDate={endDate}
         />
       </div>
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
