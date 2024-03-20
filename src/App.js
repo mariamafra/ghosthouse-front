@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import AddProperty from './pages/AddProperty';
 import ReservationCalendar from './pages/ReservationCalendar';
 import PropertyDetailPage from './pages/PropertyDetailPage';
+import MyReservations from './pages/MyReservations';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path='/addProperty' element={<AddProperty />}/>
           <Route path='/propertyDetail/:id' element={<PropertyDetailPage />}/>
           <Route path='/calendar-reservation/:id' element={<ReservationCalendar />}/>
+          <Route path='/my-reservations' element={<MyReservations />}/>
         </Routes>
       </Router>
     </div>

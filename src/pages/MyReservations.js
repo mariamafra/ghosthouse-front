@@ -1,6 +1,7 @@
 import React from 'react';
-import { Grid } from '@mui/material';
-import PropertyCard from './PropertyCard';
+import Appbar from '../components/Appbar'
+import PropertyList from "../components/PropertyList";
+import { Container, Typography } from "@mui/material";
 
 
 
@@ -20,20 +21,19 @@ const properties = [
     price: '$300,000',
     location: 'City, Country',
     imageUrl: 'https://example.com/apartment1.jpg',
-  },
-  // Add more properties as needed
+  }
 ];
 
-const PropertyList = () => {
-  return (
-    <Grid container spacing={2}>
-      {properties.map((property) => (
-        <Grid item key={property.id} xs={12} sm={6} md={4} lg={3}>
-          <PropertyCard property={property} />
-        </Grid>
-      ))}
-    </Grid>
+const MyReservations = ({properties}) => {
+    return (
+        <Container>
+            <Appbar />
+            <Typography variant="h3" gutterBottom>
+                Minhas reservas
+            </Typography>
+            <PropertyList properties={properties}/>
+        </Container>
   );
 };
 
-export default PropertyList;
+export default MyReservations;
