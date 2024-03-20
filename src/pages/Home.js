@@ -5,12 +5,13 @@ import {Link} from 'react-router-dom';
 import { Container, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { PROPERTIES_URL } from "../endpoints";
 
 function Home() {
     const [properties, setProperties] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/properties')
+        axios.get(`${PROPERTIES_URL}`)
         .then(res => { 
             console.log('sim ', res)
             setProperties(res.data);

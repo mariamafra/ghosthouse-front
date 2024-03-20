@@ -6,6 +6,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { Container } from "@mui/material";
 import {Link, useParams} from 'react-router-dom';
 import axios from 'axios';
+import { PROPERTIES_URL } from "../endpoints";
 /*
 const property = {
   address: '123 Main St',
@@ -21,7 +22,7 @@ const PropertyDetailPage = () => {
   const [property, setProperty] = useState([])
 
     useEffect(() => {
-        axios.get(`http://localhost:8081/api/properties/${id}`)
+        axios.get(`${PROPERTIES_URL}/${id}`)
         .then(res => { 
             console.log('sim ', res)
             setProperty(res.data);

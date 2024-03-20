@@ -5,7 +5,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Button, TextField } from '@mui/material';
 import dayjs from 'dayjs';
 
-export default function DateRangePicker({dates}) {
+export default function DateRangePicker({dates, onDatesSelected}) {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   
@@ -34,6 +34,9 @@ export default function DateRangePicker({dates}) {
     
       console.log('Start Date:', startDate);
       console.log('End Date:', endDate);
+      if (startDate && endDate) {
+        onDatesSelected(startDate, endDate);
+      }
       
   };
 
@@ -46,6 +49,7 @@ export default function DateRangePicker({dates}) {
           onChange={(date) => (setStartDate(date), setEndDate(null))}
           renderInput={(params) => <TextField {...params} />}
           shouldDisableDate={shouldDisableDate}
+          disablePast
         />
         <DatePicker
           label="End Date"
@@ -59,7 +63,7 @@ export default function DateRangePicker({dates}) {
       </div>
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
         <Button variant="contained" color="primary" onClick={handleNextButtonClick}>
-          Next
+          Confirmar Reserva
         </Button>
       </div>
     </LocalizationProvider>
