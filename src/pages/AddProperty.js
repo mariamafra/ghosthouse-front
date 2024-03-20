@@ -5,12 +5,13 @@ import { Container, Typography } from "@mui/material";
 
 function AddProperty() {
     return (
-        <Container>
-            <Appbar position="static" sx={{ bgcolor: "black" }}/>
+        <div>
+            <Appbar />
             <Typography variant="h3" gutterBottom>
+                Adicionar novo imóveis
                 <Property />
             </Typography>
-        </Container>
+        </div>
     );
 }
 

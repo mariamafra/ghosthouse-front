@@ -31,7 +31,7 @@ const PropertyDetailPage = () => {
     }, [])
 
   return (
-    <Container>
+    <div>
       <Appbar />
       <PropertyDetail property={property} />
       <Button
@@ -44,7 +44,7 @@ const PropertyDetailPage = () => {
           >
             Reservar
           </Button>
-    </Container>  
+    </div>  
   );
 };
 

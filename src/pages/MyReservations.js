@@ -5,34 +5,15 @@ import { Container, Typography } from "@mui/material";
 
 
 
-const properties = [
-  {
-    id: 1,
-    title: 'Beautiful House',
-    description: 'A stunning property with scenic views.',
-    price: '$500,000',
-    location: 'City, Country',
-    imageUrl: 'https://example.com/house1.jpg',
-  },
-  {
-    id: 2,
-    title: 'Cozy Apartment',
-    description: 'A comfortable apartment in the heart of the city.',
-    price: '$300,000',
-    location: 'City, Country',
-    imageUrl: 'https://example.com/apartment1.jpg',
-  }
-];
-
 const MyReservations = ({properties}) => {
     return (
-        <Container>
+        <div>
             <Appbar />
             <Typography variant="h3" gutterBottom>
                 Minhas reservas
             </Typography>
             <PropertyList properties={properties}/>
-        </Container>
+        </div>
   );
 };
 

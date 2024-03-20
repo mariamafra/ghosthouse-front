@@ -37,12 +37,12 @@ function ReservationCalender() {
     };
 
     return (
-        <Container>
+        <div>
             <Appbar />
             <Box sx={{mt:4}}>
                 <Calendar dates={dates} onDatesSelected={handleDatesSelected}/>
             </Box>
-        </Container>
+        </div>
     );
 }
 
