@@ -7,11 +7,11 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { PROPERTIES_URL } from '../endpoints';
 
-function Home() {
+function MyProperties() {
     const [properties, setProperties] = useState([])
 
     useEffect(() => {
-        axios.get(PROPERTIES_URL)
+        axios.get(`${PROPERTIES_URL}/proprietario/1`)
         .then(res => { 
             console.log('sim ', res)
             setProperties(res.data);
@@ -23,11 +23,11 @@ function Home() {
         <div>
             <Appbar />
             <Typography variant="h3" gutterBottom sx={{ m: 2 }}>
-                Principais imóveis
+                Meus imóveis
             </Typography>
             <PropertyList properties={properties}/>
         </div>
     );
 }
 
-export default Home;
+export default MyProperties;

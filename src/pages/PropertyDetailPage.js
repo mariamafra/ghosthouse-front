@@ -5,11 +5,13 @@ import { Button } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import {Link, useParams} from 'react-router-dom';
 import axios from 'axios';
-import { PROPERTIES_URL } from "../endpoints";
+import { PROPERTIES_URL, RESERVATIONS_URL } from "../endpoints";
+import ReservaList from '../components/ReservaList';
 
 const PropertyDetailPage = () => {
   let { id } = useParams();
   const [property, setProperty] = useState([])
+  const [reservas, setReservas] = useState([])
 
     useEffect(() => {
         axios.get(`${PROPERTIES_URL}/${id}`)
@@ -18,6 +20,13 @@ const PropertyDetailPage = () => {
             setProperty(res.data);
         })
         .catch(err => console.log(err))
+
+        axios.get(`${RESERVATIONS_URL}/property/${id}`)
+            .then(res => { 
+                console.log('sim ', res);
+                setReservas(res.data);
+            })
+            .catch(err => console.log(err));
     }, [])
 
   return (
@@ -34,6 +43,8 @@ const PropertyDetailPage = () => {
           >
             Reservar
           </Button>
+
+        <ReservaList reservas={reservas}/>
     </div>  
   );
 };

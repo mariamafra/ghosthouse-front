@@ -20,6 +20,9 @@ export default function Appbar() {
           <Typography component={Link} to='/my-reservations' sx={{mr:10, textDecoration: 'none', color: 'inherit'}}> 
             Minhas reservas
           </Typography>
+          <Typography component={Link} to='/my-properties' sx={{mr:10, textDecoration: 'none', color: 'inherit'}}> 
+            Minhas propriedades
+          </Typography>
           <IconButton
             size="large"
             edge="end"
