@@ -1,26 +1,42 @@
 import React, { useState } from 'react';
 import { TextField, Button, Grid, Box, InputLabel, Select, MenuItem } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import { PROPERTIES_URL } from '../endpoints';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Property() {
-  const [houseData, setHouseData] = useState({
-    address: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    numberOfRooms: '',
-    price: '',
+  const navigate  = useNavigate();
+  const [propertyData, setPropertyData] = useState({
+    nome: '',
+    descricao: '',
+    quantidadeQuartos: '',
+    area: '',
+    categoria: '',
+    endereco: '',
+    valorDiaria: '',
+    imageUrl: '',
+    idProprietario: 1,
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setHouseData({ ...houseData, [name]: value });
+    setPropertyData({ ...propertyData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle submission here
-    console.log(houseData);
+    console.log(propertyData);
+
+    axios.post(`${PROPERTIES_URL}`, propertyData)
+        .then((res) => {
+            console.log(res)
+            navigate("/")
+        })
+        .catch(err => {
+            console.log(err)
+            alert(`Oops! algo deu errado...${err.response}`)
+        })
   };
 
   return (
@@ -36,71 +52,91 @@ function Property() {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Address"
-              name="address"
-              value={houseData.address}
+              label="Nome"
+              name="nome"
+              value={propertyData.nome}
               onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Description"
-              name="description"
-              value={houseData.description}
+              label="Descrição"
+              name="descricao"
+              value={propertyData.descricao}
               onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Imagem"
-              name="imagem"
-              value={houseData.description}
+              label="Foto"
+              name="imageUrl"
+              value={propertyData.imageUrl}
               onChange={handleInputChange}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
             <InputLabel id="categoria-label">Categoria</InputLabel>
             <Select
               fullWidth
               labelId="categoria-label"
               id="categoria"
-              value={houseData.category}
-              onChange={handleInputChange} // assuming this is your handler function
+              name="categoria"
+              value={propertyData.categoria}
+              onChange={handleInputChange}
             >
-              <MenuItem value="Mansão">Mansão</MenuItem>
-              <MenuItem value="Barraco">Barraco</MenuItem>
-              <MenuItem value="Condomínio fechado">Condomínio fechado</MenuItem>
-              <MenuItem value="Caverna">Caverna</MenuItem>
-              <MenuItem value="Sobrado">Sobrado</MenuItem>
-              <MenuItem value="Penthouse">Penthouse</MenuItem>
+              <MenuItem value="CASA">Casa</MenuItem>
+              <MenuItem value="APARTAMENTO">Apartamento</MenuItem>
+              <MenuItem value="CHALE">Chalé</MenuItem>
+              <MenuItem value="CASTELO">Castelo</MenuItem>
+              <MenuItem value="FAZENDA">Fazenda</MenuItem>
+              <MenuItem value="HOTEL_ASSOMBRADO">Hotel</MenuItem>
+              <MenuItem value="LOFT">Loft</MenuItem>
+              <MenuItem value="MANSÃO">Mansão</MenuItem>
+              <MenuItem value="BARRACO">Barraco</MenuItem>
+              <MenuItem value="CONDOMINIO_FECHADO">Condomínio fechado</MenuItem>
+              <MenuItem value="CAVERNA">Caverna</MenuItem>
+              <MenuItem value="SOBRADO">Sobrado</MenuItem>
+              <MenuItem value="PENTHOUSE">Penthouse</MenuItem>
             </Select>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label="Zip Code"
-              name="zipCode"
-              value={houseData.zipCode}
+              label="Endereço"
+              name="endereco"
+              value={propertyData.endereco}
               onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label="Number of Rooms"
-              name="numberOfRooms"
-              value={houseData.numberOfRooms}
+              label="Número de Quartos"
+              type='number'
+              name="quantidadeQuartos"
+              value={propertyData.quantidadeQuartos}
               onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label="Price"
-              name="price"
-              value={houseData.price}
+              label="Área"
+              type='number'
+              name="area"
+              value={propertyData.area}
+              onChange={handleInputChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Valor Diária"
+              type='number'
+              name="valorDiaria"
+              value={propertyData.valorDiaria}
               onChange={handleInputChange}
             />
           </Grid>
@@ -112,7 +148,7 @@ function Property() {
               type="submit"
               style={{ marginTop: '40px' }}
             >
-              Add Property
+              Adicionar Propriedade
             </Button>
           </Grid>
         </Grid>

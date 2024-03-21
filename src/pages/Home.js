@@ -22,7 +22,7 @@ function Home() {
         <div>
             <Appbar />
             <Typography variant="h3" gutterBottom sx={{ m: 2 }}>
-                Principais imóveis cadastrados
+                Principais imóveis
             </Typography>
             <PropertyList properties={properties}/>
         </div>

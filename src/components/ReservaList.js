@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardContent, Typography, Grid } from '@material-ui/core';
-import { RESERVATIONS_URL, PROPERTIES_URL } from '../endpoints';
+import { Card, CardContent, Typography, Grid, Button } from '@material-ui/core';
+import { PROPERTIES_URL } from '../endpoints';
 import axios from 'axios';
+import dayjs from 'dayjs';
+import { CancelOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,29 +17,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const bookedProperties = [
-  {
-    id: 1,
-    name: 'Property 1',
-    address: '123 Main St, City, Country',
-    bookedDates: ['2024-03-21', '2024-03-22', '2024-03-23'],
-  },
-  {
-    id: 2,
-    name: 'Property 2',
-    address: '456 Elm St, Town, Country',
-    bookedDates: ['2024-03-24', '2024-03-25'],
-  },
-  // Add more booked properties as needed
-];
-
-const ReservaList = ({reservas}) => {
+const ReservaList = ({reservas, onCancelReservation }) => {
     const classes = useStyles();
     const [properties, setProperties] = useState([])
 
     useEffect(() => {
       const getIds = async () => {
-        console.log('aa')
         try {
           const propriedades = await Promise.all(
             reservas.map(async (reserva) => {
@@ -47,33 +32,21 @@ const ReservaList = ({reservas}) => {
           );
           setProperties(propriedades);
         } catch (error) {
-          console.error('Error fetching properties:', error);
-          setProperties([]); // Set empty array if there's an error
+          console.error('Error:', error);
+          setProperties([]);
         }
       };
       console.log(properties)
       if (properties.length === 0) {
-        getIds(); // Fetch properties when reservas change
+        getIds();
       }
-    }, [properties]); // Run when reservas change
+    }, [properties]);
 
-  /*const getIds = (reservas) => {
-    Promise.all(reservas.map(reserva => 
-      axios.get(`${PROPERTIES_URL}/${reserva.propertyId}`)
-        .then(res => res.data)
-        .catch(err => {
-          console.log('erro ', err);
-          return null; // Return null if property retrieval fails
-        })
-    ))
-    .then(propriedades => {
-      console.log('aa ', propriedades);
-      setProperties(propriedades);
-      console.log('bb ', properties)
-    })
-    .catch(err => console.log('Promise.all error: ', err));
-  }
-*/
+    const toPascalCase = (str) => {
+      if (!str) return "";
+      return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+    };
+
     return (
       <div className={classes.root}>
         <Grid container spacing={2}>
@@ -88,11 +61,24 @@ const ReservaList = ({reservas}) => {
                   {properties.find(property => property.id == reserva.propertyId)?.endereco}
                   </Typography>
                   <Typography variant="body2" component="p">
-                    Data Início: {reserva.startDate}
+                    Status: {toPascalCase(reserva.status)}
                   </Typography>
                   <Typography variant="body2" component="p">
-                    Data Final: {reserva.endDate}
+                    Data Início: {dayjs(reserva.startDate).format('DD/MM/YYYY')}
                   </Typography>
+                  <Typography variant="body2" component="p">
+                    Data Final: {dayjs(reserva.endDate).format('DD/MM/YYYY')}
+                  </Typography>
+                <Button
+                  variant="contained"
+                  color="error"
+                  startIcon={<CancelOutlined />}
+                  type="submit"
+                  style={{marginTop: '40px'}}
+                  onClick={() => onCancelReservation(reserva.id)}
+                >
+                  Cancelar Reserva
+                </Button>
                 </CardContent>
               </Card>
             </Grid>

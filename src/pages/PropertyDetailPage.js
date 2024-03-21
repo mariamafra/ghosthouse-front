@@ -3,7 +3,6 @@ import Appbar from '../components/Appbar'
 import PropertyDetail from '../components/PropertyDetail';
 import { Button } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import { Container } from "@mui/material";
 import {Link, useParams} from 'react-router-dom';
 import axios from 'axios';
 import { PROPERTIES_URL } from "../endpoints";

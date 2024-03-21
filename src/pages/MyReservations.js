@@ -1,28 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import Appbar from '../components/Appbar'
 import ReservaList from "../components/ReservaList";
-import { CardContent, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import axios from 'axios';
-import { RESERVATIONS_URL, PROPERTIES_URL } from '../endpoints';
+import { RESERVATIONS_URL } from '../endpoints';
 
 const MyReservations = () => {
     const [reservas, setReservas] = useState([])
 
     useEffect(() => {
-      axios.get(`${RESERVATIONS_URL}/tenant/2`)
-      .then(res => { 
-          console.log('sim ', res)
-          setReservas(res.data);
-      })
-      .catch(err => console.log(err))
-  }, [])
+        axios.put(`${RESERVATIONS_URL}/check-expired`)
+            .then(() => {
+                axios.get(`${RESERVATIONS_URL}/tenant/2`)
+                    .then(res => { 
+                        console.log('sim ', res);
+                        setReservas(res.data);
+                    })
+                    .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
+    }, []);
+
+    const handleCancelReservation = async (reservationId) => {
+        console.log(`ID ${reservationId}`);
+        const confirmCancel = window.confirm("Tem certeza que deseja cancelar essa reserva?");
+    
+        if (confirmCancel) {
+            try {
+                await axios.delete(`${RESERVATIONS_URL}/${reservationId}`);
+                window.location.reload();
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Falha ao cancelar a reserva, favor tente novamente depois.");
+            }
+        }
+    };
+    
+
     return (
         <div>
             <Appbar />
             <Typography variant="h3" gutterBottom>
                 Minhas reservas
             </Typography>
-            <ReservaList reservas={reservas}/>
+            <ReservaList reservas={reservas} onCancelReservation={handleCancelReservation}/>
         </div>
   );
 };

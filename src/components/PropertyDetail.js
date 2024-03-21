@@ -38,7 +38,7 @@ const PropertyDetail = ({ property }) => {
   const classes = useStyles();
   
   const toPascalCase = (str) => {
-    if (!str) return ""; // If str is not defined or null, return an empty string
+    if (!str) return "";
     return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
   };
   
