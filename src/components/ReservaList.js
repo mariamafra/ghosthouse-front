@@ -15,6 +15,17 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 275,
     marginBottom: theme.spacing(2),
   },
+  canceledStatus: {
+    color: 'red',
+  },
+  canceledButton: {
+    backgroundColor: 'grey',
+    color: 'white',
+  },
+  activeButton: {
+    backgroundColor: 'red',
+    color: 'white',
+  },
 }));
 
 const ReservaList = ({reservas, onCancelReservation }) => {
@@ -60,22 +71,25 @@ const ReservaList = ({reservas, onCancelReservation }) => {
                   <Typography color="textSecondary" gutterBottom>
                   {properties.find(property => property.id == reserva.propertyId)?.endereco}
                   </Typography>
-                  <Typography variant="body2" component="p">
-                    Status: {toPascalCase(reserva.status)}
+                  <Typography variant="body2" component="p"> 
+                    <span className={toPascalCase(reserva.status) === 'Cancelada' ? classes.canceledStatus : ''}>
+                      Status: {toPascalCase(reserva.status)}
+                    </span>
                   </Typography>
                   <Typography variant="body2" component="p">
                     Data Início: {dayjs(reserva.startDate).format('DD/MM/YYYY')}
                   </Typography>
                   <Typography variant="body2" component="p">
                     Data Final: {dayjs(reserva.endDate).format('DD/MM/YYYY')}
-                  </Typography>
+                  </Typography> 
                 <Button
                   variant="contained"
-                  color="error"
                   startIcon={<CancelOutlined />}
                   type="submit"
                   style={{marginTop: '40px'}}
                   onClick={() => onCancelReservation(reserva.id)}
+                  className={toPascalCase(reserva.status) === 'Cancelada' ? classes.canceledButton : classes.activeButton}
+                  disabled={toPascalCase(reserva.status) === 'Cancelada'}
                 >
                   Cancelar Reserva
                 </Button>
