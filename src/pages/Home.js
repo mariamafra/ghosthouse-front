@@ -2,7 +2,7 @@ import React from "react";
 import Appbar from '../components/Appbar'
 import PropertyList from "../components/PropertyList";
 import {Link} from 'react-router-dom';
-import { Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { PROPERTIES_URL } from '../endpoints';
@@ -25,7 +25,9 @@ function Home() {
             <Typography variant="h3" gutterBottom sx={{ m: 2 }}>
                 Principais imóveis
             </Typography>
-            <PropertyList properties={properties}/>
+            <Box sx={{ml:5}}>
+                <PropertyList properties={properties}/>
+            </Box>
         </div>
     );
 }

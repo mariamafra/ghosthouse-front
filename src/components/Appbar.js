@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const teste = 1
+
 export default function Appbar() {
   const classes = useStyles();
 
@@ -27,9 +29,11 @@ export default function Appbar() {
           <Typography component={Link} to={'/'} variant="h6" sx={{ flexGrow: 1 }} className={classes.link}>
             GHOSTHOUSE
           </Typography>
+          {teste === 1 &&( /*MOCK PARA ALTERAR BASEADO NO USUÁRIO*/
           <Typography component={Link} to='/my-reservations' sx={{mr:10}} className={classes.link}> 
             Minhas reservas
           </Typography>
+          )}
           <Typography component={Link} to='/my-properties' sx={{mr:10}} className={classes.link}> 
             Minhas propriedades
           </Typography>
