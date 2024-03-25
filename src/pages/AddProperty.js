@@ -7,7 +7,7 @@ function AddProperty() {
     return (
         <div>
             <Appbar />
-            <Typography variant="h3" gutterBottom>
+            <Typography variant="h3" gutterBottom style={{marginTop: '40px'}}>
                 Adicionar novo imóveis
                 <Property />
             </Typography>

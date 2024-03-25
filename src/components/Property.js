@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Grid, Box, InputLabel, Select, MenuItem } from '@material-ui/core';
+import { TextField, Button, Grid, Box, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { PROPERTIES_URL } from '../endpoints';
 import axios from 'axios';
@@ -43,7 +43,7 @@ function Property() {
     <Box
     display="flex"
     justifyContent="center"
-    alignItems="center"
+    alignItems="flex-start"
     minHeight="100vh"
   >
     <Box p={4}>
@@ -77,30 +77,31 @@ function Property() {
             />
           </Grid>
           <Grid item xs={12}>
-            <InputLabel id="categoria-label">Categoria</InputLabel>
-            <Select
-              fullWidth
-              labelId="categoria-label"
-              id="categoria"
-              name="categoria"
-              value={propertyData.categoria}
-              onChange={handleInputChange}
-            >
-              <MenuItem value="CASA">Casa</MenuItem>
-              <MenuItem value="APARTAMENTO">Apartamento</MenuItem>
-              <MenuItem value="CHALE">Chalé</MenuItem>
-              <MenuItem value="CASTELO">Castelo</MenuItem>
-              <MenuItem value="FAZENDA">Fazenda</MenuItem>
-              <MenuItem value="HOTEL_ASSOMBRADO">Hotel</MenuItem>
-              <MenuItem value="LOFT">Loft</MenuItem>
-              <MenuItem value="MANSÃO">Mansão</MenuItem>
-              <MenuItem value="BARRACO">Barraco</MenuItem>
-              <MenuItem value="CONDOMINIO_FECHADO">Condomínio fechado</MenuItem>
-              <MenuItem value="CAVERNA">Caverna</MenuItem>
-              <MenuItem value="SOBRADO">Sobrado</MenuItem>
-              <MenuItem value="PENTHOUSE">Penthouse</MenuItem>
-            </Select>
-          </Grid>
+              <FormControl fullWidth>
+                <InputLabel id="categoria-label">Categoria</InputLabel>
+                <Select
+                  labelId="categoria-label"
+                  id="categoria"
+                  name="categoria"
+                  value={propertyData.categoria}
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value="CASA">Casa</MenuItem>
+                  <MenuItem value="APARTAMENTO">Apartamento</MenuItem>
+                  <MenuItem value="CHALE">Chalé</MenuItem>
+                  <MenuItem value="CASTELO">Castelo</MenuItem>
+                  <MenuItem value="FAZENDA">Fazenda</MenuItem>
+                  <MenuItem value="HOTEL_ASSOMBRADO">Hotel</MenuItem>
+                  <MenuItem value="LOFT">Loft</MenuItem>
+                  <MenuItem value="MANSÃO">Mansão</MenuItem>
+                  <MenuItem value="BARRACO">Barraco</MenuItem>
+                  <MenuItem value="CONDOMINIO_FECHADO">Condomínio fechado</MenuItem>
+                  <MenuItem value="CAVERNA">Caverna</MenuItem>
+                  <MenuItem value="SOBRADO">Sobrado</MenuItem>
+                  <MenuItem value="PENTHOUSE">Penthouse</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -143,7 +144,7 @@ function Property() {
           <Grid item xs={12}>
             <Button
               variant="contained"
-              color="primary"
+              color="black"
               startIcon={<AddCircleOutlineIcon />}
               type="submit"
               style={{ marginTop: '40px' }}
