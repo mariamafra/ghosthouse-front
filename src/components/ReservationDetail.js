@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography, Grid, Box, Paper } from '@material-ui/core';
+import dayjs from 'dayjs';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ReservationDetail = ({ property }) => {
+const ReservationDetail = ({ reserva, property }) => {
   /* A reserva precisa ser salva depois dessa página, e não na de calendário, ou a gente tem que apagar caso não confirme*/
   /* Trazer as informações da resver para fazer o calculo */
   const classes = useStyles();
@@ -43,6 +44,14 @@ const ReservationDetail = ({ property }) => {
     if (!str) return "";
     return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
   };
+
+  const calculaTotal = () => {
+    const startDate = dayjs(reserva.startDate);
+    const endDate = dayjs(reserva.endDate);
+    const daysDiff = endDate.diff(startDate, 'day');
+    console.log('aa ', daysDiff)
+    return property.valorDiaria * daysDiff;
+  }
 
   return (
     <Container className={classes.root}>
@@ -73,16 +82,20 @@ const ReservationDetail = ({ property }) => {
               <Typography variant="h6">{property.quantidadeQuartos}</Typography>
             </div>
             <div className={classes.propertyContainer}>
+              <Typography variant="h6" className={classes.label}>Valor Diária:</Typography>
+              <Typography variant="h6">{property.valorDiaria}</Typography>
+            </div>
+            <div className={classes.propertyContainer}>
               <Typography variant="h6" className={classes.label}>Valor Total:</Typography>
-              <Typography variant="h6">{property.valorDiaria /* * a quantidade de dias resevado */}</Typography>
+              <Typography variant="h6">{calculaTotal()}</Typography>
             </div>
             <div className={classes.propertyContainer}>
               <Typography variant="h6" className={classes.label}>Data de entrada:</Typography>
-              <Typography variant="h6">{property.valorDiaria}</Typography>
+              <Typography variant="h6">{dayjs(reserva.startDate).format('DD/MM/YYYY')}</Typography>
             </div>
             <div className={classes.propertyContainer}>
               <Typography variant="h6" className={classes.label}>Data de saida:</Typography>
-              <Typography variant="h6">{property.valorDiaria}</Typography>
+              <Typography variant="h6">{dayjs(reserva.endDate).format('DD/MM/YYYY')}</Typography>
             </div>
           </Grid>
           <Grid item xs={12} sm={6} className={classes.imageGridItem}>

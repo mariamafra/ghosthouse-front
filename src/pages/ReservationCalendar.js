@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { PROPERTIES_URL, RESERVATIONS_URL } from "../endpoints";
+import { PROPERTIES_URL } from "../endpoints";
 import dayjs from "dayjs";
 
 function ReservationCalender() {
@@ -25,15 +25,7 @@ function ReservationCalender() {
     const handleDatesSelected = (start, end) => {
         const reserva = {startDate: dayjs(start).format('YYYY-MM-DD'), endDate: dayjs(end).format('YYYY-MM-DD'), propertyId: parseInt(id), tenantId: 2}
         console.log(reserva)
-        axios.post(`${RESERVATIONS_URL}`, reserva)
-            .then((res) => {
-                console.log(res)
-                navigate("/")
-            })
-            .catch(err => {
-                console.log(err)
-                alert(`Oops! algo deu errado...${err.response}`)
-            })
+        navigate(`/reservation-confirmation/${id}`, { state: { reserva } });
     };
 
     return (
