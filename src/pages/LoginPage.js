@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { TextField, Button, Typography, Container, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -71,6 +72,9 @@ const LoginPage = () => {
           >
             Sign In
           </Button>
+          <Typography variant="body2" color="textSecondary" align="center">
+            Don't have an account? <Link to="/register">Sign Up</Link>
+          </Typography>
         </form>
       </div>
     </Container>

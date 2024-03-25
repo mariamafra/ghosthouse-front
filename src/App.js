@@ -8,6 +8,7 @@ import MyReservations from './pages/MyReservations';
 import MyProperties from './pages/MyProperties';
 import ReservationDetailPage from './pages/ReservationDetailPage';
 import LoginPage from './pages/LoginPage';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/my-reservations' element={<MyReservations />}/>
           <Route path='/my-properties' element={<MyProperties />}/>
           <Route path='/login' element={<LoginPage />}/>
+          <Route path='/register' element={<Register />}/>
           <Route path='/reservation-confirmation/:id' element={<ReservationDetailPage />}/> {/* Precisa ser revisto, o ID precisa ser o da reserva*/}
         </Routes>
       </Router>
