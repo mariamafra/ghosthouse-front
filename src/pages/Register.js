@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Appbar from '../components/Appbar'
 import { TextField, Button, Typography, Container, makeStyles, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +38,8 @@ const Register = () => {
   };
 
   return (
+    <div>
+    <Appbar /> {/* TRATAR PARA NÃO APARECER O MENU */}
     <Container component="main" maxWidth="xs">
       <div className={classes.container}>
         <Typography component="h1" variant="h5">
@@ -131,6 +134,7 @@ const Register = () => {
         </form>
       </div>
     </Container>
+    </div>
   );
 };
 

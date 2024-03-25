@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Appbar from '../components/Appbar'
 import { TextField, Button, Typography, Container, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +32,8 @@ const LoginPage = () => {
   };
 
   return (
+    <div>
+    <Appbar /> {/* TRATAR PARA NÃO APARECER O MENU */}
     <Container component="main" maxWidth="xs">
       <div className={classes.container}>
         <Typography component="h1" variant="h5">
@@ -78,6 +81,7 @@ const LoginPage = () => {
         </form>
       </div>
     </Container>
+    </div>
   );
 };
 
