@@ -26,13 +26,14 @@ const MyReservations = () => {
         const confirmCancel = window.confirm("Tem certeza que deseja cancelar essa reserva?");
     
         if (confirmCancel) {
-            try {
-                await axios.delete(`${RESERVATIONS_URL}/${reservationId}`);
-                window.location.reload();
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Falha ao cancelar a reserva, favor tente novamente depois.");
-            }
+            await axios.delete(`${RESERVATIONS_URL}/${reservationId}`)
+                .then(res => { 
+                    window.location.reload();
+                })
+                .catch(err => {
+                    console.log("Error: ", err)
+                    alert(err.response.data.titulo);
+                });
         }
     };
     
