@@ -26,7 +26,7 @@ function Home() {
                 Principais imóveis
             </Typography>
             <Box sx={{ml:5}}>
-                <PropertyList properties={properties}/>
+                <PropertyList properties={properties} redirect='home'/>
             </Box>
         </div>
     );

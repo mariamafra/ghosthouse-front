@@ -25,7 +25,7 @@ function MyProperties() {
                 Meus imóveis
             </Typography>
             <Box sx={{ml:5}}>
-                <PropertyList properties={properties}/>
+                <PropertyList properties={properties} redirect="property"/>
             </Box>
         </div>
     );
