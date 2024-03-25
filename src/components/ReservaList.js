@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
   canceledStatus: {
     color: 'red',
   },
+  activeStatus: {
+    color: 'green',
+  },
+  finilizeStatus: {
+    color: 'blue',
+  },
   canceledButton: {
     backgroundColor: 'grey',
     color: 'white',
@@ -72,7 +78,7 @@ const ReservaList = ({reservas, onCancelReservation }) => {
                   {properties.find(property => property.id == reserva.propertyId)?.endereco}
                   </Typography>
                   <Typography variant="body2" component="p"> 
-                    <span className={toPascalCase(reserva.status) === 'Cancelada' ? classes.canceledStatus : ''}>
+                    <span className={toPascalCase(reserva.status) === 'Cancelada' ? classes.canceledStatus : toPascalCase(reserva.status) === 'Ativa' ? classes.activeStatus : classes.finilizeStatus}>
                       Status: {toPascalCase(reserva.status)}
                     </span>
                   </Typography>
@@ -88,8 +94,8 @@ const ReservaList = ({reservas, onCancelReservation }) => {
                   type="submit"
                   style={{marginTop: '40px'}}
                   onClick={() => onCancelReservation(reserva.id)}
-                  className={toPascalCase(reserva.status) === 'Cancelada' ? classes.canceledButton : classes.activeButton}
-                  disabled={toPascalCase(reserva.status) === 'Cancelada'}
+                  className={toPascalCase(reserva.status) === 'Cancelada' || toPascalCase(reserva.status) === 'Finalizada' ? classes.canceledButton : classes.activeButton}
+                  disabled={toPascalCase(reserva.status) === 'Cancelada' || toPascalCase(reserva.status) === 'Finalizada'}
                 >
                   Cancelar Reserva
                 </Button>
