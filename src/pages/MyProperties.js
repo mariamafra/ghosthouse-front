@@ -8,6 +8,7 @@ import { PROPERTIES_URL } from '../endpoints';
 
 function MyProperties() {
     const [properties, setProperties] = useState([])
+    localStorage.setItem('fromMyProperties', true);
 
     useEffect(() => {
         axios.get(`${PROPERTIES_URL}/proprietario/1`)

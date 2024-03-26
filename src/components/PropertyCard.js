@@ -25,36 +25,6 @@ const PropertyCard = ({ property, redirect }) => {
     }
 };
 
-  const renderButton = () => {
-    console.log(redirect)
-    if (redirect === 'home') {
-      console.log(redirect)
-      return (
-        <Button
-          variant="contained"
-          color="grey"
-          startIcon={<VisibilityOutlined />}
-          component={Link}
-          to={`/propertyDetail/${id}`}
-        >
-          Visualizar
-        </Button>
-      );
-    } else if (redirect === 'property') {
-      return (
-        <Button
-          variant="contained"
-          color="error"
-          startIcon={<DeleteOutline />}
-          onClick={() => handleCancelProperty(id)}
-          style= {{backgroundColor: 'red', color: 'white'}}
-        >
-          Apagar
-        </Button>
-      );
-    }
-  };
-
   return (
     <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <CardMedia
@@ -79,7 +49,15 @@ const PropertyCard = ({ property, redirect }) => {
           Endereço: {endereco}
         </Typography>
       </CardContent>
-      {renderButton()}
+      <Button
+          variant="contained"
+          color="grey"
+          startIcon={<VisibilityOutlined />}
+          component={Link}
+          to={`/propertyDetail/${id}`}
+        >
+          Visualizar
+        </Button>
     </Card>
   );
 };

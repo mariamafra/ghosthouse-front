@@ -3,6 +3,7 @@ import Appbar from '../components/Appbar'
 import PropertyDetail from '../components/PropertyDetail';
 import { Button } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import { VisibilityOutlined, EditOutlined, DeleteIcon, DeleteOutline} from '@material-ui/icons';
 import {Link, useParams} from 'react-router-dom';
 import axios from 'axios';
 import { PROPERTIES_URL, RESERVATIONS_URL } from "../endpoints";
@@ -12,8 +13,12 @@ const PropertyDetailPage = () => {
   let { id } = useParams();
   const [property, setProperty] = useState([])
   const [reservas, setReservas] = useState([])
+  
+  const fromMyProperties = localStorage.getItem('fromMyProperties');
+  console.log(fromMyProperties)
 
     useEffect(() => {
+      console.log("AQUIIIIII")
         axios.get(`${PROPERTIES_URL}/${id}`)
         .then(res => { 
             console.log('sim ', res)
@@ -29,22 +34,60 @@ const PropertyDetailPage = () => {
             .catch(err => console.log(err));
     }, [])
 
-  return (
-    <div>
-      <Appbar />
-      <PropertyDetail property={property} />
-      <Button
+    const handleCancelProperty = async (id) => {
+      console.log(`ID ${id}`);
+      const confirmCancel = window.confirm("Tem certeza que deseja deletar esse imovel?");
+  
+      if (confirmCancel) {
+          await axios.delete(`${PROPERTIES_URL}/${id}`)
+              .then(res => { 
+                  window.location.reload();
+              })
+              .catch(err => {
+                  console.log("Error: ", err)
+                  alert(err.response.data.titulo);
+              });
+      }
+  };
+
+    const renderButton = () => {
+      if (fromMyProperties === 'true') {
+        return (
+          <Button
+            variant="contained"
+            color="error"
+            startIcon={<DeleteOutline />}
+            onClick={() => handleCancelProperty(id)}
+            style= {{backgroundColor: 'red', color: 'white', marginTop: '40px', marginBottom: '40px'}}
+          >
+            Apagar
+          </Button>
+        );
+      } else {
+        return (
+          <Button
             variant="contained"
             color="grey"
             startIcon={<AddCircleOutlineIcon />}
             type="submit"
-            style={{marginTop: '40px'}}
+            style={{marginTop: '40px', marginBottom: '40px'}}
             component={Link} to={`/calendar-reservation/${id}`}
           >
             Reservar
           </Button>
+        );
+      }
+    };
 
-        <ReservaList reservas={reservas}/>
+  return (
+    <div>
+      <Appbar />
+      <PropertyDetail property={property} />
+      {renderButton()}
+          {console.log("DENTRO DO RETURN" + fromMyProperties)}
+          {fromMyProperties === 'true' ? 
+            <ReservaList reservas={reservas}/>
+          : null}
     </div>  
   );
 };
