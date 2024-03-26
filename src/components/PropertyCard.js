@@ -20,7 +20,7 @@ const PropertyCard = ({ property, redirect }) => {
             })
             .catch(err => {
                 console.log("Error: ", err)
-                alert(err.response);
+                alert(err.response.data.titulo);
             });
     }
 };

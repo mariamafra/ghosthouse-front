@@ -71,6 +71,7 @@ const ReservaList = ({reservas, onCancelReservation }) => {
             <Grid item xs={12} sm={6} md={4} key={reserva.id}>
               <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
+                  {console.log(reserva)}
                   <Typography variant="h5" component="h2">
                   {properties.find(property => property.id == reserva.propertyId)?.nome}
                   </Typography>

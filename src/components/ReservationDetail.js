@@ -36,8 +36,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ReservationDetail = ({ reserva, property }) => {
-  /* A reserva precisa ser salva depois dessa página, e não na de calendário, ou a gente tem que apagar caso não confirme*/
-  /* Trazer as informações da resver para fazer o calculo */
   const classes = useStyles();
   
   const toPascalCase = (str) => {
