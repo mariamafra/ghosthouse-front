@@ -50,6 +50,8 @@ const MyReservations = () => {
       <Typography variant="h3" gutterBottom>
         Minhas reservas
       </Typography>
+      {console.log(user.id)}
+      {console.log(reservas)}
       <ReservaList
         reservas={reservas}
         onCancelReservation={handleCancelReservation}

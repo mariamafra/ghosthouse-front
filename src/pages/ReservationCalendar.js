@@ -7,9 +7,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { PROPERTIES_URL } from "../endpoints";
 import dayjs from "dayjs";
+import { useContext } from "react";
+import UserContext from "../UserContext";
 
 function ReservationCalender() {
     let { id } = useParams();
+    const { user } = useContext(UserContext);
     const [dates, setDates] = useState([])
     const navigate  = useNavigate();
 
@@ -23,7 +26,7 @@ function ReservationCalender() {
     }, [])
 
     const handleDatesSelected = (start, end) => {
-        const reserva = {startDate: dayjs(start).format('YYYY-MM-DD'), endDate: dayjs(end).format('YYYY-MM-DD'), propertyId: parseInt(id), tenantId: 2}
+        const reserva = {startDate: dayjs(start).format('YYYY-MM-DD'), endDate: dayjs(end).format('YYYY-MM-DD'), propertyId: parseInt(id), tenantId: user.id}
         console.log(reserva)
         navigate(`/reservation-confirmation/${id}`, { state: { reserva } });
     };
