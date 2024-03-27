@@ -5,19 +5,8 @@ import { PROPERTIES_URL } from '../endpoints';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function Property() {
+const Property = ({propertyData, setPropertyData}) => {
   const navigate  = useNavigate();
-  const [propertyData, setPropertyData] = useState({
-    nome: '',
-    descricao: '',
-    quantidadeQuartos: '',
-    area: '',
-    categoria: '',
-    endereco: '',
-    valorDiaria: '',
-    imageUrl: '',
-    idProprietario: 1,
-  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

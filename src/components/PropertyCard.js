@@ -2,29 +2,10 @@ import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { VisibilityOutlined, EditOutlined, DeleteIcon, DeleteOutline} from '@material-ui/icons';
-import { PROPERTIES_URL } from '../endpoints';
-import axios from 'axios';
+import { VisibilityOutlined } from '@material-ui/icons';
 
-const PropertyCard = ({ property, redirect }) => {
+const PropertyCard = ({ property }) => {
   const { id, nome, descricao, valorDiaria, endereco, imageUrl } = property;
-
-  const handleCancelProperty = async (id) => {
-    console.log(`ID ${id}`);
-    const confirmCancel = window.confirm("Tem certeza que deseja deletar esse imovel?");
-
-    if (confirmCancel) {
-        await axios.delete(`${PROPERTIES_URL}/${id}`)
-            .then(res => { 
-                window.location.reload();
-            })
-            .catch(err => {
-                console.log("Error: ", err)
-                alert(err.response.data.titulo);
-            });
-    }
-};
-
   return (
     <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <CardMedia

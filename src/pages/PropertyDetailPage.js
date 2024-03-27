@@ -50,7 +50,7 @@ const PropertyDetailPage = () => {
               });
       }
   };
-  
+
     const renderButton = () => {
       if (fromMyProperties === 'true') {
         return (
@@ -72,7 +72,8 @@ const PropertyDetailPage = () => {
                 color="primary"
                 startIcon={<EditIcon />}
                 style={{ marginTop: '40px', marginBottom: '40px' }}
-                // Adicione o manipulador de evento para ação de edição
+                component={Link}
+                to={`/editProperty/${id}`}
               >
                 Editar
               </Button>

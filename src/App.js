@@ -9,6 +9,7 @@ import MyProperties from './pages/MyProperties';
 import ReservationDetailPage from './pages/ReservationDetailPage';
 import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
+import EditPropertyPage from './pages/EditProperty';
 
 function App() {
   return (
@@ -17,13 +18,14 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/addProperty' element={<AddProperty />}/>
+          <Route path='/editProperty/:id' element={<EditPropertyPage />}/>
           <Route path='/propertyDetail/:id' element={<PropertyDetailPage />}/>
           <Route path='/calendar-reservation/:id' element={<ReservationCalendar />}/>
           <Route path='/my-reservations' element={<MyReservations />}/>
           <Route path='/my-properties' element={<MyProperties />}/>
           <Route path='/login' element={<LoginPage />}/>
           <Route path='/register' element={<Register />}/>
-          <Route path='/reservation-confirmation/:id' element={<ReservationDetailPage />}/> {/* Precisa ser revisto, o ID precisa ser o da reserva*/}
+          <Route path='/reservation-confirmation/:id' element={<ReservationDetailPage />}/> 
         </Routes>
       </Router>
     </div>
