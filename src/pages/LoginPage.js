@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Appbar from '../components/Appbar'
 import { TextField, Button, Typography, Container, makeStyles } from '@material-ui/core';
+import axios from 'axios';
+import { AUTH_URL } from '../endpoints';
+import { UserContext } from '../UserContext';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -22,13 +25,28 @@ const useStyles = makeStyles((theme) => ({
 const LoginPage = () => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [senha, setSenha] = useState('');
+  const [error, setError] = useState(false);
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // AUTENTICAR USUARIO
     console.log('Email:', email);
-    console.log('Password:', password);
+    console.log('Password:', senha);
+    const login = {email: email, senha: senha}
+    axios.post(`${AUTH_URL}`, login)
+        .then((res) => {
+            const { id, nome, email, telefone, userType } = res.data;
+            setUser({ id, nome, email, telefone, userType });
+            localStorage.setItem("isLoggedIn", true)
+            navigate("/")
+        })
+        .catch(err => {
+            console.log(err)
+            setError(true)
+        })
   };
 
   return (
@@ -39,6 +57,10 @@ const LoginPage = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        {error ? <Typography component="p" variant="caption" color='error'>
+          Usuário ou senha incorretos.
+        </Typography> : null}
+        
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -58,13 +80,13 @@ const LoginPage = () => {
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
+            name="senha"
+            label="senha"
             type="password"
-            id="password"
+            id="senha"
             autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
           />
           <Button
             type="submit"
