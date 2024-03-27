@@ -1,12 +1,41 @@
 import { createContext, useState } from "react";
 
-export const UserContext = createContext();
+const UserContext = createContext();
+export default UserContext;
 
-export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState("");
+export function UserProvider({ children }) {
+  const [user, setUser] = useLocalStorage("user", {});
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );
-};
+}
+
+export function useLocalStorage(key, initialValue) {
+  console.log("aaaa");
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.log(error);
+      return initialValue;
+    }
+  });
+
+  const setValue = (value) => {
+    try {
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      /* eslint-disable-next-line no-console */
+      console.log(error);
+    }
+  };
+
+  return [storedValue, setValue];
+}

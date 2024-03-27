@@ -6,6 +6,8 @@ import { VisibilityOutlined } from '@material-ui/icons';
 
 const PropertyCard = ({ property }) => {
   const { id, nome, descricao, valorDiaria, endereco, imageUrl } = property;
+  const isLoggedIn = localStorage.getItem("isLoggedIn")
+
   return (
     <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <CardMedia
@@ -30,15 +32,27 @@ const PropertyCard = ({ property }) => {
           Endereço: {endereco}
         </Typography>
       </CardContent>
-      <Button
+      {isLoggedIn === 'true' ? 
+        <Button
+        variant="contained"
+        color="grey"
+        startIcon={<VisibilityOutlined />}
+        component={Link}
+        to={`/propertyDetail/${id}`}
+      >
+        Visualizar
+      </Button>
+        : 
+        <Button
           variant="contained"
-          color="grey"
+        //  style={/* TODO - DEIXAR CINZA CLARO */}
           startIcon={<VisibilityOutlined />}
-          component={Link}
-          to={`/propertyDetail/${id}`}
+          onClick={() => alert("Faça login para poder exibir detalhes do imóvel!")}
         >
           Visualizar
         </Button>
+      }
+      
     </Card>
   );
 };
