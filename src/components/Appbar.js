@@ -5,9 +5,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import logo from '../imagem/gh.jpg'
 import { makeStyles } from '@material-ui/core/styles';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const useStyles = makeStyles((theme) => ({
   link: {
@@ -16,10 +19,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const teste = 1
-
 export default function Appbar() {
   const classes = useStyles();
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem("isLoggedIn")
+
+  const LOCATARIO = "LOCATARIO";
+
+
+  const logout = () => {
+    setUser({})
+    localStorage.setItem("isLoggedIn", false)
+    navigate('/login')
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -29,22 +42,34 @@ export default function Appbar() {
           <Typography component={Link} to={'/'} variant="h6" sx={{ flexGrow: 1 }} className={classes.link}>
             GHOSTHOUSE
           </Typography>
-          {teste === 1 &&( /*MOCK PARA ALTERAR BASEADO NO USUÁRIO*/
-          <Typography component={Link} to='/my-reservations' sx={{mr:10}} className={classes.link}> 
-            Minhas reservas
-          </Typography>
-          )}
-          <Typography component={Link} to='/my-properties' sx={{mr:10}} className={classes.link}> 
-            Minhas propriedades
-          </Typography>
-          <IconButton
-            size="large"
-            edge="end"
-            color="inherit"
-            aria-label="add"
-          >
-            <Link to='/addProperty' className={classes.link}><AddIcon /></Link>
-          </IconButton>
+          {isLoggedIn === "true" && (
+            <>
+            {user.userType === LOCATARIO ?
+            <Typography component={Link} to='/my-reservations' sx={{mr:10}} className={classes.link}> 
+              Minhas reservas
+            </Typography> : 
+            <>
+            <Typography component={Link} to='/my-properties' sx={{mr:10}} className={classes.link}> 
+              Minhas propriedades
+            </Typography>
+            <IconButton
+              size="large"
+              edge="end"
+              color="inherit"
+              aria-label="add"
+              sx={{mr:10}}
+            >
+              <Link to='/addProperty' className={classes.link}><AddIcon /></Link>
+            </IconButton> </>
+            }
+            <LogoutIcon
+              size="large"
+              edge="end"
+              color="inherit"
+              aria-label="add"
+              onClick={logout}
+            />
+          </>)}
         </Toolbar>
       </AppBar>
     </Box>
